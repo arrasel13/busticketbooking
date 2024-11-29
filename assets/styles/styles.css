@@ -11,3 +11,13 @@
 .font-raleway {
   font-family: "Raleway", sans-serif;
 }
+
+.selected {
+  color: #ffffff;
+  background-color: #1dd100;
+}
+
+.input:focus,
+.input:focus-within {
+  outline-style: none;
+}
