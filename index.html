@@ -324,7 +324,7 @@
 
                         <!-- seat serial -->
                         <div class="flex">
-                            <!-- 1 - 2 serials -->
+                            <!-- A - J serials -->
                             <div class="flex flex-col w-fit gap-6 mr-4">
                                 <!-- A -->
                                 <div class="flex justify-start items-center">
@@ -378,7 +378,7 @@
                             </div>
 
                             <!-- 1 - 2 serials -->
-                            <div class="flex flex-col w-2/5 gap-6 mx-12">
+                            <div class="flex flex-col w-2/5 gap-6 mx-12 seats">
                                 <!-- A -->
                                 <div class="flex gap-8 justify-start items-center">
                                     <p id="a1"
@@ -481,7 +481,7 @@
                             </div>
 
                             <!-- 3 - 4 serials -->
-                            <div class="flex flex-col w-2/5 gap-6 ml-12">
+                            <div class="flex flex-col w-2/5 gap-6 ml-12 seats">
                                 <!-- A -->
                                 <div class="flex gap-8 justify-end items-center">
                                     <p id="a3"
@@ -605,23 +605,19 @@
                             <!-- 1st row -->
                             <div class="flex justify-between border-b border-dotted border-b-[#03071233] pb-4">
                                 <p class="flex justify-center item-center gap-1">
-                                    Seat <span id="total-seat-count" class="bg-[#1DD100] text-white rounded-full px-4 py-1 font-inter font-bold text-[12px]">0</span>
+                                    Seat <span id="total-seat-count"
+                                        class="bg-[#1DD100] text-white rounded-full px-4 py-1 font-inter font-bold text-[12px]">0</span>
                                 </p>
                                 <p>Class</p>
                                 <p>Price</p>
                             </div>
 
                             <!-- 2nd row -->
-                            <div class="pb-4 border-b border-[#03071233]">
-                                <div class="flex justify-between mt-4">
-                                    <p class="font-inter font-medium text-base text-[#03071299]">C2</p>
-                                    <p class="font-inter font-medium text-base text-[#03071299]">Economy</p>
-                                    <p class="font-inter font-medium text-base text-[#03071299]">550</p>
-                                </div>
-                                <div class="flex justify-between mt-4">
-                                    <p class="font-inter font-medium text-base text-[#03071299]">C2</p>
-                                    <p class="font-inter font-medium text-base text-[#03071299]">Economy</p>
-                                    <p class="font-inter font-medium text-base text-[#03071299]">550</p>
+                            <div class="pb-4 border-b border-[#03071233]" id="ticket-info">
+                                <div class="flex justify-between mt-4" id="ticket-info-text">
+                                    <p class="font-inter font-medium text-base text-[#03071299] w-full text-center">
+                                        Choose a Seat First
+                                    </p>
                                 </div>
                             </div>
 
@@ -630,21 +626,21 @@
                                 <!-- Total Price -->
                                 <div class="flex justify-between py-4">
                                     <p class="font-inter font-medium text-base text-[#030712]">Total Price</p>
-                                    <p class="font-inter font-medium text-base text-[#030712]">BDT <span>1100</span></p>
+                                    <p class="font-inter font-medium text-base text-[#030712]">BDT <span id="total-price">0</span></p>
                                 </div>
 
                                 <!-- discount part -->
-                                <div class="flex justify-between pb-4">
+                                <div class="flex justify-between pb-4" id="discount-field">
                                     <p class="font-inter font-medium text-base text-[#030712]">Discount Price</p>
-                                    <p class="font-inter font-medium text-base text-[#030712]">BDT <span>1100</span></p>
+                                    <p class="font-inter font-medium text-base text-[#030712]">BDT <span id="discount-price">0</span></p>
                                 </div>
 
                                 <!-- discount coupon -->
                                 <div class="pb-4">
                                     <label
                                         class="input input-bordered flex items-center gap-2 h-[56px] pr-1 border-none shadow-sm">
-                                        <input type="text" class="grow" placeholder="Have any copupon?" />
-                                        <button
+                                        <input id="discount-code" type="text" class="grow" placeholder="Have any copupon?" />
+                                        <button onclick="discountCode()"
                                             class="btn bg-[#1DD100] text-white hover:bg-[#1DD100] hover:text-white px-6">Apply</button>
                                     </label>
                                 </div>
@@ -652,7 +648,7 @@
                                 <!-- Grand total -->
                                 <div class="flex justify-between">
                                     <p class="font-inter font-medium text-base text-[#030712]">Grand Total</p>
-                                    <p class="font-inter font-medium text-base text-[#030712]">BDT <span>1100</span></p>
+                                    <p class="font-inter font-medium text-base text-[#030712]">BDT <span id="grand-total"></span></p>
                                 </div>
                             </div>
                         </div>
