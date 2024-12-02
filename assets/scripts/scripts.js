@@ -1,95 +1,54 @@
-document.addEventListener('click', function (event) {
-    const ticketPrice = 550;
-    const couponNew15 = 15;
-    const couponCouple20 = 20;
+document.addEventListener("click", function (event) {
+  const NEW15 = 15;
+  const couple20 = 20;
+  const ticketPrice = 550;
 
-    const findParentDiv = event.target.parentNode;
-    const currentClickedItem = event.target.id;
+  const clickedItemClassList = event.target.classList;
+  //   console.log(clickedItemClassList);
 
-    const childItemExists = findParentDiv.querySelector('#'+currentClickedItem);
-    console.log(childItemExists);
+  if (clickedItemClassList.contains("selected-seat-item")) {
+    const clickItemsId = event.target.id;
 
-    if (childItemExists) {
-        const selectedSeat = document.getElementById(currentClickedItem);
-        selectedSeat.classList.remove("bg-[#0307121A]");
-        selectedSeat.classList.add("bg-[#1DD100]", "text-white");
+    if (
+      clickedItemClassList.contains("bg-[#1DD100]") &&
+      clickedItemClassList.contains("text-white")
+    ) {
+      deselectSeatItem(clickItemsId);
+      decreaseSeatCounter("total-seat-count");
+      removeSeatInfoOnTicketPurchasePart(clickItemsId, "ticket-info");
 
+      const currentActiveSeats = currentActiveSelectedSeat("total-seat-count");
 
-        const selectedSeatCounterText = document.getElementById('total-seat-count');
-        let selectedSeatCounter = parseInt(selectedSeatCounterText.innerText);
-        selectedSeatCounter = selectedSeatCounter + 1;
-        selectedSeatCounterText.innerText = selectedSeatCounter;
-        
-        if (selectedSeatCounter > 4) {
-            const notMoreThanFour = document.getElementById('not-more-than-four');
-            notMoreThanFour.classList.remove('hidden');
-        }
-
-        
-
-        const findTicketInfoDiv = document.getElementById('ticket-info');
-        console.log(findTicketInfoDiv);
-
-        const ticketInfoText = document.getElementById('ticket-info-text');
-        ticketInfoText.classList.add('hidden');
-        
-        const selectedSeatTextAdd = selectedSeat.innerText;
-
-        const selectedTicketInfoText = document.createElement("div");
-        selectedTicketInfoText.className = "flex justify-between mt-4";
-
-        const p1 = document.createElement("p");
-        p1.id = "ticket-serial";
-        p1.className = "font-inter font-medium text-base text-[#03071299]";
-        p1.textContent = selectedSeatTextAdd;
-        selectedTicketInfoText.appendChild(p1);
-        
-        const p2 = document.createElement("p");
-        p2.className = "font-inter font-medium text-base text-[#03071299]";
-        p2.textContent = "Economy";
-        selectedTicketInfoText.appendChild(p2);
-        
-        const p3 = document.createElement("p");
-        p3.className = "font-inter font-medium text-base text-[#03071299]";
-        p3.textContent = "550";
-        selectedTicketInfoText.appendChild(p3);
-
-        console.log(selectedTicketInfoText);
-        findTicketInfoDiv.appendChild(selectedTicketInfoText);
-
-        const totalPriceText = document.getElementById('total-price');
-        const totalPrice = selectedSeatCounter * ticketPrice;
-        totalPriceText.innerText = totalPrice;
-        
-        const discountPriceValue = document.getElementById('discount-price');
-        const totalPriceValue = parseInt(totalPriceText.innerHTML);
-        const discountedPrice = ((totalPriceValue * 15) / 100);
-        discountPriceValue.innerText = discountedPrice;
-        
-        const grandTotalValue = document.getElementById('grand-total');
-        const grandTotal = totalPriceValue - discountedPrice;
-        grandTotalValue.innerText = grandTotal;
-
+      if (currentActiveSeats === 0) {
+        ticketInfoTextHideOrShow("ticket-info-text", "remove");
+      }
     } else {
-        console.log('pai nai');
+      const currentActiveSeats = currentActiveSelectedSeat("total-seat-count");
+      if (currentActiveSeats <= 3) {
+        // Seat select and seat counter increased
+        const seatSelect = seatCounterById("total-seat-count");
+        // add background and text color by clicking on the selected Seat
+        const choosenSeatItem = selectSeatItem(clickItemsId);
+        // Ticket info general text hidden
+        ticketInfoTextHideOrShow("ticket-info-text", "add");
+
+        addSeatInfoOnTicketPurchasePart(
+          "ticket-info",
+          choosenSeatItem.innerText,
+          ticketPrice
+        );
+      } else {
+        ticketInfoTextHideOrShow("not-more-than-four", "remove");
+      }
     }
-    // const selectedSeatInfo = event.target;
-    // const selectedSeatId = selectedSeatInfo.id;
-    // const selectedSeat = document.getElementById(selectedSeatId);
-    // selectedSeat.classList.remove("bg-[#0307121A]");
-    // selectedSeat.classList.add("bg-[#1DD100]", "text-white");
+  }
 
-    
-    
+  if (clickedItemClassList.contains("apply-discount")) {
+    const getDiscountValue = discountCode("discount-code");
 
-    // console.log(selectedSeatInfo);
-    // console.log(findParentDiv);
-    // console.log(currentClickedItem);
-    // console.log(selectedSeatCounter);
+    if (getDiscountValue === "NEW15" || getDiscountValue === "Couple 20") {
+      ticketInfoTextHideOrShow("discount-field", "remove");
+      ticketInfoTextHideOrShow("apply-coupon-field", "add");
+    }
+  }
 });
-
-function discountCode() {
-    const getDiscountCodeValue = document.getElementById('discount-code');
-    const getDiscountCode = getDiscountCodeValue.value;
-    console.log(getDiscountCode);
-}
