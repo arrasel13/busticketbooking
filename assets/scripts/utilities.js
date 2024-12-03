@@ -17,7 +17,7 @@ function seatCounterById(eventId) {
 function decreaseSeatCounter(eventId) {
   const selectedSeatCounterText = document.getElementById(eventId);
   let selectedSeatCounter = parseInt(selectedSeatCounterText.innerText);
-  decreaseSeatCounterValue = selectedSeatCounter - 1;
+  decreaseSeatCounterValue = --selectedSeatCounter;
   selectedSeatCounterText.innerText = decreaseSeatCounterValue;
 
   return selectedSeatCounter;
@@ -81,10 +81,36 @@ function removeSeatInfoOnTicketPurchasePart(elementId, parentId) {
   divNeedToRemove.remove();
 }
 
+// Total Price
+function findTotalPriceById(eventId, ticketPrice, seatSelect) {
+  const totalPriceText = document.getElementById(eventId);
+  const totalPrice = seatSelect * ticketPrice;
+  totalPriceText.innerText = totalPrice;
+
+  return totalPrice;
+}
+
 // Discount code
-function discountCode(eventId) {
+function getDiscountCode(eventId) {
   const getDiscountCodeValue = document.getElementById(eventId);
   const getDiscountCode = getDiscountCodeValue.value;
 
   return getDiscountCode;
+}
+
+function applyDiscountById(
+  discountPriceField,
+  totalPriceValue,
+  discountPercentage
+) {
+  const discountPriceValue = document.getElementById(discountPriceField);
+  const discountedPrice = (totalPriceValue * discountPercentage) / 100;
+  discountPriceValue.innerText = discountedPrice;
+  return discountedPrice;
+}
+
+function calculateGrandTotal(eventId, totalPrice, discountedPrice) {
+  const grandTotalValue = document.getElementById(eventId);
+  const grandTotal = totalPrice - discountedPrice;
+  grandTotalValue.innerText = grandTotal;
 }

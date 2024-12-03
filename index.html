@@ -638,14 +638,15 @@
                                 </div>
 
                                 <!-- discount coupon -->
-                                <div class="pb-4" id="apply-coupon-field">
+                                <div class="pb-4 flex flex-col" id="apply-coupon-field">
                                     <label
                                         class="input input-bordered flex items-center gap-2 h-[56px] pr-1 border-none shadow-sm">
                                         <input id="discount-code" type="text" class="grow"
                                             placeholder="Have any copupon?" />
-                                        <button
-                                            class="btn bg-[#1DD100] text-white hover:bg-[#1DD100] hover:text-white px-6 apply-discount">Apply</button>
+                                            <button class="btn bg-[#1DD100] text-white hover:bg-[#1DD100] hover:text-white px-6 apply-discount btn-disabled"
+                                            id="active-apply-button">Apply</button>
                                     </label>
+                                    <span class="flex items-center justify-start mt-1 text-red-500 hidden " id="wrong-coupon-code">*** You are trying with wrong coupon code</span>
                                 </div>
 
                                 <!-- Grand total -->
@@ -665,7 +666,7 @@
                                     <span class="font-inter font-semibold text-base text-[#030712]">Passenger
                                         Name*</span>
                                 </div>
-                                <input type="text" placeholder="Enter your name"
+                                <input type="text" id="your-name" placeholder="Enter your name"
                                     class="input input-bordered w-full h-[64px]" />
                             </label>
 
@@ -674,7 +675,7 @@
                                 <div class="label">
                                     <span class="font-inter font-semibold text-base text-[#030712]">Phone Number*</span>
                                 </div>
-                                <input type="text" placeholder="Enter your phone number"
+                                <input type="text" id="phone-number" placeholder="Enter your phone number"
                                     class="input input-bordered w-full h-[64px]" />
                             </label>
 
@@ -683,12 +684,12 @@
                                 <div class="label">
                                     <span class="font-inter font-semibold text-base text-[#030712]">Email ID</span>
                                 </div>
-                                <input type="text" placeholder="Enter your email id"
+                                <input type="text" id="email-id" placeholder="Enter your email id"
                                     class="input input-bordered w-full h-[64px]" />
                             </label>
 
                             <button
-                                class="btn bg-[#1DD100] w-full font-raleway font-extrabold text-xl text-white hover:bg-[#1DD100] hover:text-white h-[64px]">Next</button>
+                                class="btn bg-[#1DD100] w-full font-raleway font-extrabold text-xl text-white hover:bg-[#1DD100] hover:text-white h-[64px] btn-disabled" id="confirm-purchase">Next</button>
 
                             <!-- terms and policy -->
                             <div class="flex justify-evenly">
@@ -705,6 +706,44 @@
         </div>
     </div>
     <!-- P.H Paribahan ticket part end -->
+
+    <!-- Modal After getting confirmation start -->
+    
+    <div class="relative z-10 hidden" id="confirm-purchase-modal" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        
+        <div class="fixed inset-0 bg-gray-500/90 transition-opacity" aria-hidden="true"></div>
+    
+        <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+            <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                
+                <div
+                    class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+                    <div class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+                        <div class="flex flex-col items-center justify-center sm:flex sm:items-start">
+                            <div
+                                class="size-16 mx-auto">
+                                <img class="" src="assets/images/success.png" alt="">
+                            </div>
+                            <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
+                                <h3 class="my-6 text-center text-2xl font-roboto font-bold text-[#27AE60]" id="modal-title">Success</h3>
+                                <div class="text-center">
+                                    <h4 class="font-roboto font-medium text-md text-[#4A4A4A]">Thank you for Booking Our Bus Seats.</h4>
+                                    <h4 class="font-roboto font-medium text-md text-[#4A4A4A]">We are working hard to find the best service and deals for you.</h4>
+                                    <p class="mt-2 font-roboto font-light text-md text-[#4A4A4A]">Shortly you will find a confirmation in your email.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 px-4 py-3 flex justify-center items-center ">
+                        <button type="button"
+                            class="mt-3 inline-flex w-full justify-center bg-[#27AE60] px-8 py-2 text-sm font-semibold text-white rounded-full ring-gray-300 hover:bg-[#27AE60] sm:mt-0 sm:w-auto" id="close-modal">Continue</button>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal After getting confirmation end -->
 
     <!-- Footer start -->
     <footer class="bg-[#030712]">
